@@ -14,11 +14,15 @@ const savedFeedback = JSON.parse(localStorage.getItem(localStorageKey));
 if (savedFeedback) {
   form.elements.email.value = savedFeedback.email;
   form.elements.message.value = savedFeedback.message;
-  
+  userForm.email = form.elements.email.value;
+  userForm.message = form.elements.message.value;
 }
 
 form.addEventListener("submit", (evt) => {
-    evt.preventDefault();
+  evt.preventDefault();
+  if (form.elements.email.value === "" || form.elements.message.value === "") {
+        return alert("Please fill in all the fields!");
+    }
     console.log(userForm);
     form.reset();
     localStorage.removeItem(localStorageKey);
